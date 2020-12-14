@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        {% include 'components/_admin_navigation.html.twig' %}
+        <div class="col-12 col-md-9">
+            <div class="row mb-5">
+                <div class="col col-md-6">
+                    <h2>Grāmatu saraksts</h2>
+                </div>
+                <div class="col col-md-6 d-flex">
+                    <div class="ml-auto">
+                        <a href="{{ path('admin_book_create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Pievienot</a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped dataTable">
+                <thead>
+                <tr>
+                    <th scope="col" class="text-center">Svītrkods</th>
+                    <th scope="col" class="text-center">Nosaukums</th>
+                    <th scope="col" class="text-center">Statuss</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td class="text-center">{{ book.code }}</td>
+                        <td class="text-center"><a href="{{ path('admin_book_edit', {'book': book.id}) }}">{{ book.title }}</a></td>
+                        <td class="text-center">
+                            {% if book.bookIsRented %}
+                                <a href="{{ path('admin_book_return', {'book': book.id}) }}" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Spied lai atgrieztu">Aizņemts</a>
+                            {% else %}
+                                <div class="badge badge-success">Pieejams</div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

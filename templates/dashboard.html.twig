@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        {% include 'components/_admin_navigation.html.twig' %}
+        <div class="col-12 col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><h1>{{ count['books'] }}</h1></h5>
+                            <p class="card-text text-secondary">
+                                <i class="fas fa-book-medical"></i> Grāmatu skaits
+                            </p>
+                            <a href="{{ path('admin_book_list') }}" class="btn btn-primary">Apskatīt grāmatas</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><h1>{{ count['users'] }}</h1></h5>
+                            <p class="card-text text-secondary">
+                                <i class="fas fa-users"></i> Lietotājuu skaits
+                            </p>
+                            <a href="{{ path('admin_user_list') }}" class="btn btn-primary">Apskatīt lietotājus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        {% include 'components/_admin_navigation.html.twig' %}
+        <div class="col-12 col-md-9">
+            <div class="row mb-5">
+                <div class="col col-md-8">
+                    <h2>Labot grāmatu "{{ book.title }}"</h2>
+                </div>
+                <div class="col col-md-4 d-flex">
+                    <div class="ml-auto">
+                        <a href="{{ path('admin_book_list') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Atpakaļ</a>
+                        <a href="{{ path('admin_book_delete', {'book': book.id}) }}" class="btn btn-danger ml-1"><i class="far fa-trash-alt"></i> Dzēst</a>
+                    </div>
+                </div>
+            </div>
+            {% if book.image %}
+                <img class="img-thumbnail" src="/uploads/{{ book.image }}" alt="">
+            {% endif %}
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}

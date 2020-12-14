@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h3 class="mb-5">Manas rezervācijas</h3>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" class="text-center">Grāmata</th>
+                    <th scope="col" class="text-center">Statuss</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for rentedBook in bookRentals %}
+                    <tr class="font-weight-normal">
+                        <th class="text-center"><a href="{{ path('book_view', {'book': rentedBook.book.id}) }}">{{ rentedBook.book.title }}</a></th>
+                        <td class="text-center">
+                            {% if rentedBook.isReturned %}
+                                <div class="badge badge-success"><i class="fas fa-check"></i> Atgriezts</div>
+                            {% else %}
+                                <div class="badge badge-danger"><i class="fas fa-times"></i> Nav atgriezts</div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

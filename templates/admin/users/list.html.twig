@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        {% include 'components/_admin_navigation.html.twig' %}
+        <div class="col-12 col-md-9">
+            <div class="row mb-5">
+                <div class="col col-md-6">
+                    <h2>Lietotāju saraksts</h2>
+                </div>
+                <div class="col col-md-6 d-flex">
+                    <div class="ml-auto">
+                        <a href="{{ path('admin_user_create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Pievienot</a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped dataTable">
+                <thead>
+                <tr>
+                    <th scope="col" class="text-center">Vārds Uzvārds</th>
+                    <th scope="col" class="text-center">E-pasts</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td class="text-center"><a href="{{ path('admin_user_edit', {'user': user.id}) }}">{{ user.fullName }}</a></td>
+                        <td class="text-center">{{ user.email }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-2">
+        <div class="col">
+            <h2>Grāmatu saraksts</h2>
+        </div>
+        <div class="col">
+            <form method="GET" class="input-group mb-3">
+                <input type="text" class="form-control" value="{{ app.request.get('search') }}" name="search" placeholder="Ievadi gramatas nosaukumu..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="button">Meklēt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        {% for book in books %}
+            <div class="col-12 col-md-4 mb-2 mb-md-0 pb-2">
+                <div class="card">
+                    <img src="/uploads/{{ book.image }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                {% if book.bookIsRented %}
+                                    <div class="badge badge-danger">Aizņemts</div>
+                                {% else %}
+                                    <div class="badge badge-success">Pieejams</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <a href="{{ path('book_view', {'book': book.id}) }}" class="btn btn-primary btn-block">Apskatīt grāmatuu</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            No books found
+        {% endfor %}
+    </div>
+
+    <div class="mt-5">
+        {{ knp_pagination_render(books) }}
+    </div>
+{% endblock %}
